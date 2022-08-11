@@ -141,91 +141,101 @@ sudo netplan apply
 * Comentar as linhas do endereço IP estático. (comenta usando `#`)
 * Ativar o DHCP. (tornar ele como `true` ou `yes`)
 
-![image](https://user-images.githubusercontent.com/86027160/184209443-1bf0ba2c-65af-4cb6-a855-e0c4e437996c.png)
+![image](https://user-images.githubusercontent.com/86027160/184213039-2e35a024-b710-4560-be9d-5f63584029b4.png)
 
-### PC1
-* VM1-PC1
-* VM2-PC1
+* Para atualizar as definições e versões de pacotes/bibliotecas dos repositórios do Ubuntu
+```
+sudo apt update
+```
+* Para atualizar os pacotes com as novas definições setadas com o update
+```
+sudo apt upgrade -y
+```
+![image](https://user-images.githubusercontent.com/86027160/184215812-9018c0cb-ea5c-4eb2-973f-e3a52ce3180b.png)
 
-### PC2
-* VM1-PC2
-* VM2-PC2
+### Instalando o SSH <br>
+```
+sudo apt-get install openssh-server
+```
+* Verifique se o SSH foi instalado corretamente: 
+  ```
+  systemctl status ssh
+  ```
+* Verifique o status das portas do sistema:
+  ```
+  netstat -an | grep LISTEN. # verifique se a porta 22 está LISTENING
+  ```
+* Para garantir o funcionamento do SSH Server, é necessário habilita-lo no firewall. Faça-o: 
+  ```
+  sudo ufw allow ssh
+  ```
+* Ative o firewall: 
+  ```
+  sudo ufw enable
+  ```
+#### Após ter concluído o processo, volte para as configurações anteriores:
+* Coloque a configuração de rede da VM como ``Modo Bridge``
+![image](https://user-images.githubusercontent.com/86027160/184216647-8294ad5e-4325-4c9a-80d0-5580fb704f22.png)
+* Tire os comentários do arquivo .YAML
 
-### PC3
-* VM1-PC3
-* VM2-PC3
+## Configurações de Host-Only
+* Configurações do adaptador1 do Host-Only
+![image](https://user-images.githubusercontent.com/86027160/184218352-c7206bf4-12a6-474f-83ca-413e87c8b802.png)
 
-### PC4
-* VM1-PC4
-* VM2-PC4
+* Configurações do adaptador2 do host-only
+![image](https://user-images.githubusercontent.com/86027160/184218933-2f0a2180-9f4a-493a-b946-ae4e7d225ca8.png)
 
-
-
+* Definindo o Host-Only
 
 
 
-  ## Começando a instalar o ``SSH Server``
-  
-   1. Pré-requisitos: <br>
-       1.1. Alterar na configuração da máquina a configuração de rede para ``NAT``. <br>
-       1.2. Comentar as linhas do endereço IP estático.(No arquivo .YAML) <br>
-       1.3. Ativar o DHCP. (No arquivo .YAML) <br>
+## Configuração estática dos nomes
+* Edite os arquivo /etc/hosts conforme as definições da tabela a seguir:
 
-       ![dhcp-false](https://user-images.githubusercontent.com/84058517/183922957-7aca9c24-ab96-416d-b34b-b518e8df316d.png)
+```
+Tabela 2: Definições de endereços IPs da Rede e Nomes de Hosts
+-------------------------------------------------------------------------------------------------
+|  DESCRICAO  |       IP        |      hostname     |          FQDN                 |   aliase  |
+-------------------------------------------------------------------------------------------------
+| VM1-PC1     | 192.168.24.67   |   grupo5-vm1-pc1  |santos.grupo5-924.ifalara.net  |    san    |
+| VM2-PC1     | 192.168.24.69   |   grupo5-vm2-pc1  |coringao.grupo5-924.ifalara.net|    cor    |
+| VM1-PC2     | 192.168.24.68   |   grupo5-vm1-pc2  |trikas.grupo5-924.ifalara.net  |    tri    |
+| VM2-PC2     | 192.168.24.70   |   grupo5-vm2-pc2  |vascao.grupo5-924.ifalara.net  |    vas    |
+| VM1-PC3     | 192.168.24.71   |   grupo5-vm1-pc3  |feto.grupo5-924.ifalara.net    |    feto   |
+| VM2-PC3     | 192.168.24.73   |   grupo5-vm2-pc3  |marcao.grupo5-924.ifalara.net  |    mar    |
+| VM1-PC4     | 192.168.24.72   |   grupo5-vm1-pc4  |felippo.grupo5-924.ifalara.net |    flpp   |
+| VM2-PC4     | 192.168.24.74   |   grupo5-vm2-pc4  |juarez.grupo5-924.ifalara.net  |    jua    |
+-------------------------------------------------------------------------------------------------
+```
 
-   2. Instalando o SSH Server <br>
-   * ### Certifique-se que a Máquina Virtual está conectada a internet <br>
-       * Para atualizar as definições e versões de pacotes/bibliotecas dos repositórios do Ubuntu <br>
-       ```
-       sudo apt update
-       ```
-       * Para atualizar os pacotes com as novas definições setadas com o update <br>
-       ```
-       sudo apt upgrade -y
-       ```
-   * ### Instalando o SSH <br>
-      ```
-      sudo apt-get install openssh-server
-      ```
-    
-       #### Após ter feito o processo inteiro, sem nenhum empecilho, prossiga:
-       
-       * Verifique se o ssh foi instalado corretamente: 
+```shell
+sudo nano /etc/hosts
+```
 
-         ```
-         systemctl status ssh
-         ```
+* Exemplo do arquivo /etc/hosts na VM1:
 
-       * Verifique o status das portas do sistema:
+```
+127.0.0.1 localhost
+127.0.1.1 srv-vm1-pc1   #Nome da VM 
+172.17.1.1 vm1-pc1 forousan.labredes.net vpn
+172.17.1.2 srv-vm2-pc1 stallings.labredes.net mail
+172.17.1.3 srv-vm1-pc2 kurose.labredes.net www
+172.17.1.4 srv-vm2-pc2 tanembaum.labredes.net file
 
-         ```
-         netstat -an | grep LISTEN. # verifique se a porta 22 está LISTENING
-         ```
-         
-       * Para garantir o funcionamento do SSH Server, é necessário habilita-lo no firewall. Faça-o: 
-         ```
-         sudo ufw allow ssh
-         ```
-       * Ative o firewall: 
-         ```
-         sudo ufw enable
-         ```
-       #### Após ter concluído o processo, volte para as configurações anteriores:
-       * Coloque a configuração de rede da VM como ``Modo Bridge``
-       
-       ![pipipopo](https://user-images.githubusercontent.com/84058517/183930270-52ff96ea-7539-4d49-aa3d-fd17cc12e59b.png)
-       * Tire os comentários do arquivo .YAML
-       
-       ![semcomentario](https://user-images.githubusercontent.com/84058517/183934739-31b1c0b8-7db6-4078-b6fb-efb875c21964.png)
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+```
 
-       # Servidor concluído! Ultimos passos: 
-       * Logar em outra máquina virtual(pode ser até em outro PC caso os dois ou mais estejam conectados via cabeamento):
-       ```
-       ssh usuario@ipderedeunico
-       ```
-       Exemplo: 
-       ```
-       ssh administrador@192.168.14.53
-       ```
-       
-       Após isso, está pronto o funcionamento do servidor
+> **Fazer isso em todas as VMS!!!**
+
+# Últimos passos: 
+* Logar em outra máquina virtual:
+```
+ssh usuario@ipderedeunico
+```
+Exemplo: 
+```
+ssh administrador@192.168.14.53
+```
