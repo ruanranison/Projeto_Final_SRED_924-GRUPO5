@@ -187,6 +187,11 @@ sudo apt-get install openssh-server
 
 * Definindo o Host-Only
 
+![image](https://user-images.githubusercontent.com/86027160/184417463-d30da1eb-18cb-4969-b9ef-694061d04df4.png)
+
+* Definindo usuários (criar um usuário com um nome distinto para as duas VMs de cada PC)
+
+![image](https://user-images.githubusercontent.com/86027160/184418883-41d9d7a0-fb5e-41ae-8163-54953dbb7686.png)
 
 
 ## Configuração estática dos nomes
@@ -212,15 +217,19 @@ Tabela 2: Definições de endereços IPs da Rede e Nomes de Hosts
 sudo nano /etc/hosts
 ```
 
-* Exemplo do arquivo /etc/hosts na VM1:
+* Exemplo de Arquivo /etc/hosts:
 
 ```
 127.0.0.1 localhost
-127.0.1.1 srv-vm1-pc1   #Nome da VM 
-172.17.1.1 vm1-pc1 forousan.labredes.net vpn
-172.17.1.2 srv-vm2-pc1 stallings.labredes.net mail
-172.17.1.3 srv-vm1-pc2 kurose.labredes.net www
-172.17.1.4 srv-vm2-pc2 tanembaum.labredes.net file
+127.0.1.1 vm1-pc1   #Nome da VM 
+192.168.24.67 vm1-pc1 santos.grupo5-924.ifalara.net san
+192.168.24.69 vm2-pc1 coringao.grupo5-924.ifalara.net cor
+192.168.24.68 vm1-pc2 trikas.grupo5-924.ifalara.net tri
+192.168.24.70 vm2-pc2 vascao.grupo5-924.ifalara.net vas
+192.168.24.71 vm1-pc3 feto.grupo5-924.ifalara.net feto
+192.168.24.73 vm2-pc3 marcao.grupo5-924.ifalara.net mar
+192.168.24.72 vm1-pc4 felippo.grupo5-924.ifalara.net flpp
+192.168.24.74 vm2-pc4 juarez.grupo5-924.ifalara.net jua
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     localhost ip6-localhost ip6-loopback
