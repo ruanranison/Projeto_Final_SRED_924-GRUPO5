@@ -240,11 +240,14 @@ ff02::2 ip6-allrouters
 > **Fazer isso em todas as VMS!!!**
 
 # Últimos passos: 
-* Logar em outra máquina virtual:
+## Logar em outra máquina virtual:
 ```
 ssh usuario@ipderedeunico
 ```
 Exemplo: 
 ```
-ssh administrador@192.168.14.53
+ssh administrador@192.168.24.70
 ```
+
+## Utilização fisíca do switch
+
