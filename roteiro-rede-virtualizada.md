@@ -1,13 +1,20 @@
-## Roteiro da Rede Virtualizada 
+# Roteiro da Rede Virtualizada 
 ### Grupo 5
 
-Para a nossa rede virtualizada. teremos a descrição das VMs, os IPs, hostnames, FQDNs e aliases listados abaixo.
+## Descrição
 
-* IP: nosso número de identificação única para cada máquina utilizada.
-* hostname: nome da nossa máquina onde está vinculada ao IP.
-* FQDN: endereço estático associado ao IP.
-* aliases: nome atribuído ao IP.
- 
+* Para a realização deste roteiro foi criado um ambiente de rede, no qual deve conter 8 máquinas virtuais com o S.O. Ubuntu Server, seguindo a seguinte topologia:
+
+## Topologia da Rede Virtualizada
+
+![Diagrama sem nome drawio (1)](https://user-images.githubusercontent.com/86027160/186276175-ee9d8a35-d38d-49ca-9bc6-833ac9aa0f45.png)
+
+> **Imagem feita a partir do draw.io**
+
+Basicamente, a rede vai possuir 4 PCs conectados entre si a partir dos cabos ethernet e um switch físico, com suas respectivas configurações de rede. Dentro de cada PC será criado 2 VMs, onde todas as VMs criadas poderão se conectar através dos switches virtuais das VMs e do switch físico com seus cabos de rede (ethernet). Sendo assim será possível conectar-se entre elas. No nosso exemplo, fizemos login em usuários criados nestas VMs para evidenciar essa conexão. 
+
+* Para a nossa rede virtualizada teremos a descrição das VMs, os IPs, hostnames, FQDNs e aliases listados abaixo.
+
 ## Configuração do serviço de nomes estáticos.
 
 ```
@@ -26,7 +33,16 @@ Tabela1: Definições de endereços IPs da Rede e Nomes de Hosts
 -------------------------------------------------------------------------------------------------
 ```
 
+* IP: nosso número de identificação única para cada máquina utilizada.
+* hostname: nome da nossa máquina onde está vinculada ao IP.
+* FQDN: endereço estático associado ao IP.
+* aliases: nome atribuído ao IP.
 
+# Passo a passo
+
+Para que seja possível uma conexão entre as VMs e os PCs da nossa rede virtualizada, será necessário algumas configurações de acesso, configuração estática de IPs, etc.
+
+> ### Faça o passo a passo em todas as VMs da rede!
 
 ## Criação das VMs da rede
 
@@ -237,9 +253,19 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ```
 
-> **Fazer isso em todas as VMS!!!**
+> **Fazer todos os passos do roteiro em todas as VMS!!!**
 
 # Últimos passos: 
+
+## Conexão dos cabos ethernet nos PCs utilizados 
+Com o auxílio de um switch, conectamos todos os computadores entre si através do cabo ethernet, como mostrado nas respectivas imagens:
+
+![20220812_170930-min](https://user-images.githubusercontent.com/86027160/186281131-6da9185c-fede-461a-a395-4ec751ff53b1.jpg)
+![20220812_170937-min](https://user-images.githubusercontent.com/86027160/186281185-534d8cfb-ebcb-4009-8258-a9c0ec2b2bda.jpg)
+![20220812_171012-min](https://user-images.githubusercontent.com/86027160/186281163-2322ff51-0b1e-441c-badf-13bfb6b6f010.jpg)
+
+Logo após isso, já será possível conectar qualquer VM a outra dentro da rede.  
+
 ## Logar em outra máquina virtual:
 ```
 ssh usuario@ipderedeunico
@@ -248,6 +274,3 @@ Exemplo:
 ```
 ssh administrador@192.168.24.70
 ```
-
-## Utilização fisíca do switch
-
