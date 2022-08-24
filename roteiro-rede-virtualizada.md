@@ -13,30 +13,8 @@
 
 Basicamente, a rede vai possuir 4 PCs conectados entre si a partir dos cabos ethernet e um switch físico, com suas respectivas configurações de rede. Dentro de cada PC será criado 2 VMs, onde todas as VMs criadas poderão se conectar através dos switches virtuais das VMs e do switch físico com seus cabos de rede (ethernet). Sendo assim será possível conectar-se entre elas. No nosso exemplo, fizemos login em usuários criados nestas VMs para evidenciar essa conexão. 
 
-* Para a nossa rede virtualizada teremos a descrição das VMs, os IPs, hostnames, FQDNs e aliases listados abaixo.
+* Para a nossa rede virtualizada precisamos de algumas configurações estáticas ao decorrer do roteiro, que se encontra [aqui](https://github.com/ruanranison/GRUPO5-SRED-924/edit/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md).
 
-## Configuração do serviço de nomes estáticos.
-
-```
-Tabela1: Definições de endereços IPs da Rede e Nomes de Hosts
--------------------------------------------------------------------------------------------------
-|  DESCRICAO  |       IP        |      hostname     |          FQDN                 |   aliase  |
--------------------------------------------------------------------------------------------------
-| VM1-PC1     | 192.168.24.67   |   grupo5-vm1-pc1  |santos.grupo5-924.ifalara.net  |    san    |
-| VM2-PC1     | 192.168.24.69   |   grupo5-vm2-pc1  |coringao.grupo5-924.ifalara.net|    cor    |
-| VM1-PC2     | 192.168.24.68   |   grupo5-vm1-pc2  |trikas.grupo5-924.ifalara.net  |    tri    |
-| VM2-PC2     | 192.168.24.70   |   grupo5-vm2-pc2  |vascao.grupo5-924.ifalara.net  |    vas    |
-| VM1-PC3     | 192.168.24.71   |   grupo5-vm1-pc3  |feto.grupo5-924.ifalara.net    |    feto   |
-| VM2-PC3     | 192.168.24.73   |   grupo5-vm2-pc3  |marcao.grupo5-924.ifalara.net  |    mar    |
-| VM1-PC4     | 192.168.24.72   |   grupo5-vm1-pc4  |felippo.grupo5-924.ifalara.net |    flpp   |
-| VM2-PC4     | 192.168.24.74   |   grupo5-vm2-pc4  |juarez.grupo5-924.ifalara.net  |    jua    |
--------------------------------------------------------------------------------------------------
-```
-
-* IP: nosso número de identificação única para cada máquina utilizada.
-* hostname: nome da nossa máquina onde está vinculada ao IP.
-* FQDN: endereço estático associado ao IP.
-* aliases: nome atribuído ao IP.
 
 # Passo a passo
 
@@ -115,25 +93,7 @@ ifconfig -a
   ```
 
 ## Configuração dos endereços IPs
-```
-Tabela 2: Definições de endereços IPs da Rede 
----------------------------------
-|  DESCRICAO  |       IP        |
----------------------------------
-| rede        | 192.168.24.64   |
-| máscara     | 255.255.255.240 |
-| Gateway     | 192.168.24.65   |
-| VM1-PC1     | 192.168.24.67   | 
-| VM2-PC1     | 192.168.24.69   |
-| VM1-PC2     | 192.168.24.68   |
-| VM2-PC2     | 192.168.24.70   |
-| VM1-PC3     | 192.168.24.71   | 
-| VM2-PC3     | 192.168.24.73   |
-| VM1-PC4     | 192.168.24.72   |
-| VM2-PC4     | 192.168.24.74   |
----------------------------------
-```
-Após ter aberto o arquivo `.yaml` para edição, altere as configurações antigas para as referente a `Tabela 2`. Essas modificações deverão ser feitas em todas as VMs. Exemplo:
+Após ter aberto o arquivo `.yaml` para edição, altere as configurações antigas para as referente a [`Tabela 1`](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md). Essas modificações deverão ser feitas em todas as VMs. Exemplo:
 
 ![image](https://user-images.githubusercontent.com/86027160/184198770-b253b52f-2d80-4292-b9f4-b92b4b5abb47.png)
 
@@ -211,25 +171,8 @@ sudo apt-get install openssh-server
 
 
 ## Configuração estática dos nomes
-* Edite os arquivo /etc/hosts conforme as definições da tabela a seguir:
-
+* Edite o arquivo /etc/hosts conforme as definições da [Tabela 2](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md) a seguir:                                                                                                                                                         
 ```
-Tabela 2: Definições de endereços IPs da Rede e Nomes de Hosts
--------------------------------------------------------------------------------------------------
-|  DESCRICAO  |       IP        |      hostname     |          FQDN                 |   aliase  |
--------------------------------------------------------------------------------------------------
-| VM1-PC1     | 192.168.24.67   |   grupo5-vm1-pc1  |santos.grupo5-924.ifalara.net  |    san    |
-| VM2-PC1     | 192.168.24.69   |   grupo5-vm2-pc1  |coringao.grupo5-924.ifalara.net|    cor    |
-| VM1-PC2     | 192.168.24.68   |   grupo5-vm1-pc2  |trikas.grupo5-924.ifalara.net  |    tri    |
-| VM2-PC2     | 192.168.24.70   |   grupo5-vm2-pc2  |vascao.grupo5-924.ifalara.net  |    vas    |
-| VM1-PC3     | 192.168.24.71   |   grupo5-vm1-pc3  |feto.grupo5-924.ifalara.net    |    feto   |
-| VM2-PC3     | 192.168.24.73   |   grupo5-vm2-pc3  |marcao.grupo5-924.ifalara.net  |    mar    |
-| VM1-PC4     | 192.168.24.72   |   grupo5-vm1-pc4  |felippo.grupo5-924.ifalara.net |    flpp   |
-| VM2-PC4     | 192.168.24.74   |   grupo5-vm2-pc4  |juarez.grupo5-924.ifalara.net  |    jua    |
--------------------------------------------------------------------------------------------------
-```
-
-```shell
 sudo nano /etc/hosts
 ```
 
