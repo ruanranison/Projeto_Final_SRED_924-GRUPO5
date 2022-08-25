@@ -5,13 +5,13 @@
 
 * Para a realização deste roteiro foi criado um ambiente de rede, no qual deve conter 8 máquinas virtuais com o S.O. Ubuntu Server, seguindo a seguinte topologia:
 
-## Topologia da Rede Virtualizada
+## Topologia Lógica da Rede Virtualizada
 
 ![Diagrama sem nome drawio (1)](https://user-images.githubusercontent.com/86027160/186276175-ee9d8a35-d38d-49ca-9bc6-833ac9aa0f45.png)
 
 > **Imagem feita a partir do draw.io**
 
-Basicamente, a rede vai possuir 4 PCs conectados entre si a partir dos cabos ethernet e um switch físico, com suas respectivas configurações de rede. Dentro de cada PC será criado 2 VMs, onde todas as VMs criadas poderão se conectar através dos switches virtuais das VMs e do switch físico com seus cabos de rede (ethernet). Sendo assim será possível conectar-se entre elas. No nosso exemplo, fizemos login em usuários criados nestas VMs para evidenciar essa conexão. 
+Basicamente, a rede vai possuir 4 PCs conectados entre si a partir dos cabos ethernet de par trançado e um switch físico de 8 portas, com suas respectivas configurações de rede. Dentro de cada PC será criado 2 VMs, onde todas as VMs criadas poderão se conectar através dos switches virtuais e do `modo de rede bridge`. Sendo assim será possível conectar-se entre elas. No nosso exemplo, fizemos login através do SSH em usuários criados nestas VMs para evidenciar essa conexão. 
 
 * Para a nossa rede virtualizada precisamos de algumas configurações estáticas ao decorrer do roteiro, que se encontra [aqui](https://github.com/ruanranison/GRUPO5-SRED-924/edit/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md).
 
@@ -200,12 +200,14 @@ ff02::2 ip6-allrouters
 
 # Últimos passos: 
 
-## Conexão dos cabos ethernet nos PCs utilizados 
+## Topologia Física da Rede Virtualizada
 Com o auxílio de um switch, conectamos todos os computadores entre si através do cabo ethernet, como mostrado nas respectivas imagens:
 
 ![20220812_170930-min](https://user-images.githubusercontent.com/86027160/186281131-6da9185c-fede-461a-a395-4ec751ff53b1.jpg)
 ![20220812_170937-min](https://user-images.githubusercontent.com/86027160/186281185-534d8cfb-ebcb-4009-8258-a9c0ec2b2bda.jpg)
 ![20220812_171012-min](https://user-images.githubusercontent.com/86027160/186281163-2322ff51-0b1e-441c-badf-13bfb6b6f010.jpg)
+
+* Nas imagens acima é possível ver a `topologia física` da rede. Nela, temos 4 cabos ethernet de par trançado ligados ao switch de 8 portas, já o switch está plugado a tomada. Assim, fazendo com que todos os PCs estejam conectados entre si.  
 
 Logo após isso, já será possível conectar qualquer VM a outra dentro da rede.  
 
