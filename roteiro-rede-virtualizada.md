@@ -209,6 +209,17 @@ Com o auxílio de um switch, conectamos todos os computadores entre si através 
 
 Logo após isso, já será possível conectar qualquer VM a outra dentro da rede.  
 
+## "Pingar" para outra máquina virtual:
+
+```
+ping ipderedeunico 
+```
+
+Exemplo:
+```
+ping 192.168.24.70
+```
+
 ## Logar em outra máquina virtual:
 ```
 ssh usuario@ipderedeunico
@@ -217,3 +228,7 @@ Exemplo:
 ```
 ssh administrador@192.168.24.70
 ```
+
+## Testes
+
+* [Aqui estão os testes realizados com `ping` e `ssh` para todos os IPs, hostnames, FQDNs e aliases da rede.]()
