@@ -26,7 +26,7 @@ Para que seja possível uma conexão entre as VMs e os PCs da nossa rede virtual
 
 Para a criação das VMs, vamos importar a imagem .OVA, ele será necessário para a construção da rede.
 
-* .OVA é um pacote que contém arquivos usados para descrever uma máquina virtual, que inclui um arquivo descritor .OVF, manifesto opcional (.MF) e arquivos de certificado e outros arquivos relacionados. 
+* .OVA é um pacote que contém arquivos usados para descrever uma máquina virtual, que inclui um arquivo descritor .OVF, manifesto opcional (.MF) e arquivos de certificado e outros arquivos relacionados. A imagem foi obtida através do servidor da sala de aula.
 
 ### Segue os passos de importação na Figura 1 e 2:
 
