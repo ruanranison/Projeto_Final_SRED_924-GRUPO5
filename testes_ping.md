@@ -60,10 +60,10 @@
 <img src="" style="width:900px;height:400px;">
 
 * ### para VM1-PC2
-<img src="" style="width:900px;height:400px;">
+<img src="https://user-images.githubusercontent.com/86027160/186727106-896df51f-a989-4e36-936a-6e572978985d.png" style="width:900px;height:400px;">
 
 * ### para VM2-PC2
-<img src="" style="width:900px;height:400px;">
+<img src="https://user-images.githubusercontent.com/86027160/186727272-4083591e-95eb-4a43-8b76-c7945ad632fe.png" style="width:900px;height:400px;">
 
 * ### para VM1-PC3
 <img src="" style="width:900px;height:400px;">
