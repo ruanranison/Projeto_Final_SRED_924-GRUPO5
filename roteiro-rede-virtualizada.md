@@ -231,4 +231,4 @@ ssh administrador@192.168.24.70
 
 ## Testes
 
-* [Aqui estão os testes realizados com `ping` e `ssh` para todos os IPs, hostnames, FQDNs e aliases da rede.]()
+* Aqui estão os testes realizados com [`ping`](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/testes_ping.md) e [`SSH`](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/testes_ssh.md) para todos os IPs, hostnames, FQDNs e aliases da rede.
