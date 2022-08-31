@@ -62,18 +62,18 @@ Tabela 3: Configuração dos hardware das VMs
 
 ```
 Tabela 4: Definições dos nomes de usuários e senha 
-------------------------------------------------
-|  DESCRICAO  |     USUÁRIOS    |     SENHA    |
-------------------------------------------------
-| VM1-PC1     |      marcos     |   adminifal  |
-| VM2-PC1     |      marcos     |   adminifal  |
-| VM1-PC2     |      ruanf      |   adminifal  |
-| VM2-PC2     |      ruanf      |   adminifal  |
-| VM1-PC3     |      ruanr      |   adminifal  | 
-| VM2-PC3     |      ruanr      |   adminifal  |
-| VM1-PC4     |      jenival    |   adminifal  |
-| VM2-PC4     |      jenival    |   adminifal  |
-------------------------------------------------
+----------------------------------
+|     USUÁRIOS    |     SENHA    |
+----------------------------------
+|      marcos1    |   adminifal  |
+|      marcos2    |   adminifal  |
+|      ruanf1     |   adminifal  |
+|      ruanf2     |   adminifal  |
+|      ruanr1     |   adminifal  | 
+|      ruanr2     |   adminifal  |
+|      jenival1   |   adminifal  |
+|      jenival2   |   adminifal  |
+----------------------------------
 ```
 
 
