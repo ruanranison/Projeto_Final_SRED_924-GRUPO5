@@ -1,9 +1,4 @@
 # Roteiro da Rede Virtualizada 
-### Grupo 5 - 924
-* José Marcos Correia dos Santos
-* Ruan Felipe Freitas de Oliveira
-* Ruan Ranison da Costa Silva
-
 ## Descrição
 
 * Para a realização deste roteiro foi criado um ambiente de rede, no qual deve conter 8 máquinas virtuais com o S.O. Ubuntu Server, seguindo a seguinte topologia:
@@ -16,7 +11,7 @@
 
 Basicamente, a rede vai possuir 4 PCs conectados entre si a partir dos cabos ethernet de par trançado e um switch físico de 8 portas, com suas respectivas configurações de rede. Dentro de cada PC será criado 2 VMs, onde todas as VMs criadas poderão se conectar através dos switches virtuais e do `modo de rede bridge`. Sendo assim será possível conectar-se entre elas. No nosso exemplo, fizemos login através do SSH em usuários criados nestas VMs para evidenciar essa conexão. 
 
-* Para a nossa rede virtualizada precisamos de algumas configurações estáticas ao decorrer do roteiro, que se encontra [aqui](https://github.com/ruanranison/GRUPO5-SRED-924/edit/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md).
+* Para a nossa rede virtualizada precisamos de algumas configurações estáticas ao decorrer do roteiro, que se encontra [aqui](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md).
 
 
 # Passo a passo
