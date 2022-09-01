@@ -163,9 +163,16 @@ sudo apt-get install openssh-server
 
 ![image](https://user-images.githubusercontent.com/86027160/184417463-d30da1eb-18cb-4969-b9ef-694061d04df4.png)
 
-* Definindo usuários (criar um usuário com um nome distinto para as duas VMs de cada PC)
+* Definindo usuários (adicionar todos os usuários da [`Tabela 4`](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md) em TODAS as VMs)
 
-![image](https://user-images.githubusercontent.com/86027160/184418883-41d9d7a0-fb5e-41ae-8163-54953dbb7686.png)
+  * Criando usuário
+  
+  ![image](https://user-images.githubusercontent.com/86027160/184418883-41d9d7a0-fb5e-41ae-8163-54953dbb7686.png)
+
+  * Lista de usuários criados
+  
+  ![image](https://user-images.githubusercontent.com/86027160/187972744-6b4d1d21-2022-4e45-8fe9-bf7f72418008.png)
+
 
 
 ## Configuração estática dos nomes
