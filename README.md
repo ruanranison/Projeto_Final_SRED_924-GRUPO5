@@ -1,4 +1,4 @@
-# Projeto 2º Bimestre das Disciplinas de Infraestrutura e Serviços de Redes (PRIR/SRED e ISRE)
+# Projeto 4º Bimestre das Disciplinas de Infraestrutura e Serviços de Redes (PRIR/SRED e ISRE)
 ### Grupo 5
 #### Instituto Federal de Alagoas - Campus Arapiraca
 
@@ -15,18 +15,15 @@ Ruan Felipe Freitas de Oliveira
 
 ## Objetivo
 
-Criar uma rede virtualizada com o uso de 8 máquinas virtuais (essas criadas em 4 PCs) que poderão comunicar-se entre si. Para isso, foi construído um 
-roteiro com os procedimentos da rede virtual. Com o uso de um switch, foram conectadas a partir de um cabo ethernet de par trançado. Foram estabelecidas 
-configurações estáticas para as máquinas virtuais dos IPs utilizados, usuários, nomes e hardware. Para os resultados do projeto, foram feitos testes
-de comunicação utilizando os comando `ping` e `ssh`. 
+Criar um ambiente de rede virtualizado, no qual deve conter 6 máquinas virtuais com o S.O. Ubuntu Server. Utilizando de VMs que estão em funcionamento nos servidores da FAPEAL-AL.
 
 #### Segue o redirecionamento dos arquivos que possuem todas as informações ditas acima:
 
 ## Tópicos
 
-* [Configuração Estática das VMs](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md)
-* [Roteiro - Rede Virtualizada](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/roteiro-rede-virtualizada.md)
-* Testes de [ping](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/testes_ping.md) e [SSH](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/testes_ssh.md)
+* [Configuração Estática das VMs]()
+* [Roteiro - Rede Virtualizada]()
+* Testes de [ping]() e [SSH]()
 
 
 ## Considerações Finais 
