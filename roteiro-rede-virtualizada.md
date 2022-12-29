@@ -1,240 +1,170 @@
 # Roteiro da Rede Virtualizada 
 ## Descrição
 
-* Para a realização deste roteiro foi criado um ambiente de rede, no qual deve conter 8 máquinas virtuais com o S.O. Ubuntu Server, seguindo a seguinte topologia:
-
-## Topologia Lógica da Rede Virtualizada
-
-![Diagrama sem nome drawio (1)](https://user-images.githubusercontent.com/86027160/186276175-ee9d8a35-d38d-49ca-9bc6-833ac9aa0f45.png)
-
-> **Imagem feita a partir do draw.io**
-
-Basicamente, a rede vai possuir 4 PCs conectados entre si a partir dos cabos ethernet de par trançado e um switch físico de 8 portas, com suas respectivas configurações de rede. Dentro de cada PC será criado 2 VMs, onde todas as VMs criadas poderão se conectar através dos switches virtuais e do `modo de rede bridge`. Sendo assim será possível conectar-se entre elas. No nosso exemplo, fizemos login através do SSH em usuários criados nestas VMs para evidenciar essa conexão. 
+* Para a realização deste roteiro foi criado um ambiente de rede, no qual deve conter 6 máquinas virtuais com o S.O. Ubuntu Server.
 
 * Para a nossa rede virtualizada precisamos de algumas configurações estáticas ao decorrer do roteiro, que se encontra [aqui](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md).
 
+## Objetivo:
+
+   * Configurar um servidor compartilhamento de arquivos usando o serviço Samba no linux
+   * Acessar o **Gateway Server** via Putty no Windows e depois acessar os servidores **samba**.
 
 # Passo a passo
 
 Para que seja possível uma conexão entre as VMs e os PCs da nossa rede virtualizada, será necessário algumas configurações de acesso, configuração estática de IPs, etc.
 
-> ### Faça o passo a passo em todas as VMs da rede!
+* [Planilha de Acompanhamento da 924 (Grupo 5)](https://docs.google.com/spreadsheets/d/1pbw24Sg2nh0gQRG1wxN9MRf_ZY9LmZ3iT0STNHoUVq8/edit#gid=680415071)
+* [Usuários e Senhas das VMs](https://drive.google.com/file/d/1MdV-bKWlw6sobG24lDvdSd3cdz1gXh2w/view)
 
-## Criação das VMs da rede
+## Instalação do SAMBA
 
-Para a criação das VMs, vamos importar a imagem .OVA, ele será necessário para a construção da rede.
-
-* .OVA é um pacote que contém arquivos usados para descrever uma máquina virtual, que inclui um arquivo descritor .OVF, manifesto opcional (.MF) e arquivos de certificado e outros arquivos relacionados. A imagem foi obtida através do servidor da sala de aula.
-
-### Segue os passos de importação na Figura 1 e 2:
-
-![image](https://user-images.githubusercontent.com/86027160/183978615-8366e422-6321-4bcb-b040-48e634fb4740.png)
-
-![image](https://user-images.githubusercontent.com/86027160/183981533-6beca288-3e86-40e2-9c9d-94928950bb6d.png)
-
-* Um ponto a ressaltar é na `configuração de "Política de Endereço MAC"`, onde é preciso que deixe como `Gerar novos endereços MAC para todas as placas de rede` para que para cada interface de rede seja criado um novo endereço MAC.
-
-Após a criação das duas VMs, é obrigatório os seguintes passos em CADA Máquina Virtual (são 2 VMs para cada PC da rede):
-
-### Iniciar as VMs
-
-![image](https://user-images.githubusercontent.com/86027160/184192797-b0d35e24-68cd-4e50-95e1-9343476c68bc.png)
-
-
-### Fazer login nas VMs
-
-* Usuário da VM: ``administrador``
-* Senha da VM: ``adminifal``
-
-![image](https://user-images.githubusercontent.com/86027160/184193472-26d4289b-9dc4-47f5-9bbc-a35d6965760f.png)
-
-
-### Instalando o pacote de rede
-
-  ```
-  sudo apt install net-tools -y
-  ```
-### Visualizar as interfaces de rede
+Primeiramente vamos acessar a VM própria para o SAMBA. 
 
 ```
-ifconfig -a
+  su redes
 ```
-![image](https://user-images.githubusercontent.com/86027160/184196077-eeee0a97-054e-4640-9d8c-703c564385dc.png)
+> senha: admin@Lab92
 
+Logo após vamos instalar as configurações de VPN através do OpenVPN3.
 
+#### Pré-Requisitos para baixar o OpenVPN3
 
-### Configurando as NICs das VMs
-* Para que a VMs utilizem a mesma rede interna é necessário acessar as configurações de Rede de cada VM e selecionar o modo ``rede interna`` e definir o nome da rede, vamos escolher ``grupo5`` como nome da nossa rede virtual. Utilize o mesmo nome nas duas VMs.
-
-![image](https://user-images.githubusercontent.com/86027160/183985883-c01e95f9-bdf2-49a7-8992-9568d17daf51.png)
-## Definições 
-
-### Inserindo um nome para a rede ``hostname``
-
-  ```
-  sudo hostnamectl set-hostname nome-do-hostname
-  ```
-
-### Configuração estática de endereço IP na interface de rede
-* Primeiramente é necessário modificar o arquivo que configura as interfaces de rede
-* Esse arquivo é do tipo .YAML e fica no diretório ``/etc/netplan``
-* Inicialmente, verifique o nome do arquivo em seu computador da seguinte forma:
-
-  ```
-  ls -la /etc/netplan
-  ```
-  
-## Editando o .YAML
-  
-  ```
-  sudo nano /etc/netplan/01-netcfg.yaml 
-  ```
-
-## Configuração dos endereços IPs
-Após ter aberto o arquivo `.yaml` para edição, altere as configurações antigas para as referente a [`Tabela 1`](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md). Essas modificações deverão ser feitas em todas as VMs. Exemplo:
-
-![image](https://user-images.githubusercontent.com/86027160/184198770-b253b52f-2d80-4292-b9f4-b92b4b5abb47.png)
-
-* enps0s3: nome da interface que está sendo configurada. Verifique com o comando 'ifconfig -a'
-* adresses: IP e Máscara do Host.
-* gateaway: IP do Gateway  
-* dhcp4 false -> cliente DHCP está desabilitado, logo o utilizará o IP do campo 'addresses'
-
-### Aplicar as configurações
-```
-sudo netplan apply
+```bash
+sudo apt install apt-transport-https -y
+sudo apt install curl -y
+sudo apt install gpg -y
 ```
 
-## Servidor SSH
+```bash
+curl -fsSL https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub | gpg --dearmor > ~/openvpn-repo-pkg-keyring.gpg
+sudo mv openvpn-repo-pkg-keyring.gpg /etc/apt/trusted.gpg.d/openvpn-repo-pkg-keyring.gpg
 
-### Pré-Requisitos
-
-* Mudar o tipo da rede para `NAT`
-![image](https://user-images.githubusercontent.com/86027160/184208697-62d1f91d-6d32-4f2d-8f30-f021f2c00587.png)
-
-* Comentar as linhas do endereço IP estático. (comenta usando `#`)
-* Ativar o DHCP. (tornar ele como `true` ou `yes`)
-
-![image](https://user-images.githubusercontent.com/86027160/184213039-2e35a024-b710-4560-be9d-5f63584029b4.png)
-
-* Para atualizar as definições e versões de pacotes/bibliotecas dos repositórios do Ubuntu
-```
+curl -fsSL https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-focal.list > ~/openvpn3.list
+sudo mv openvpn3.list /etc/apt/sources.list.d/openvpn3.list
 sudo apt update
 ```
-* Para atualizar os pacotes com as novas definições setadas com o update
-```
-sudo apt upgrade -y
-```
-![image](https://user-images.githubusercontent.com/86027160/184215812-9018c0cb-ea5c-4eb2-973f-e3a52ce3180b.png)
 
-### Instalando o SSH <br>
-```
-sudo apt-get install openssh-server
-```
-* Verifique se o SSH foi instalado corretamente: 
-  ```
-  systemctl status ssh
-  ```
-* Verifique o status das portas do sistema:
-  ```
-  netstat -an | grep LISTEN. # verifique se a porta 22 está LISTENING
-  ```
-* Para garantir o funcionamento do SSH Server, é necessário habilita-lo no firewall. Faça-o: 
-  ```
-  sudo ufw allow ssh
-  ```
-* Ative o firewall: 
-  ```
-  sudo ufw enable
-  ```
-#### Após ter concluído o processo, volte para as configurações anteriores:
-* Coloque a configuração de rede da VM como ``Modo Bridge``
-![image](https://user-images.githubusercontent.com/86027160/184216647-8294ad5e-4325-4c9a-80d0-5580fb704f22.png)
-* Tire os comentários do arquivo .YAML
+#### Instalar o OpenVPN3 
 
-## Configurações de Host-Only
-* Configurações do adaptador1 do Host-Only
-![image](https://user-images.githubusercontent.com/86027160/184218352-c7206bf4-12a6-474f-83ca-413e87c8b802.png)
-
-* Configurações do adaptador2 do host-only
-![image](https://user-images.githubusercontent.com/86027160/184218933-2f0a2180-9f4a-493a-b946-ae4e7d225ca8.png)
-
-* Definindo o Host-Only
-
-![image](https://user-images.githubusercontent.com/86027160/184417463-d30da1eb-18cb-4969-b9ef-694061d04df4.png)
-
-* Definindo usuários (adicionar todos os usuários da [`Tabela 4`](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md) em TODAS as VMs)
-
-  * Criando usuário
-  
-  ![image](https://user-images.githubusercontent.com/86027160/184418883-41d9d7a0-fb5e-41ae-8163-54953dbb7686.png)
-
-  * Lista de usuários criados
-  
-  ![image](https://user-images.githubusercontent.com/86027160/187972744-6b4d1d21-2022-4e45-8fe9-bf7f72418008.png)
-
-
-
-## Configuração estática dos nomes
-* Edite o arquivo /etc/hosts conforme as definições da [Tabela 2](https://github.com/ruanranison/GRUPO5-SRED-924/blob/main/Configura%C3%A7%C3%A3o%20Base%20das%20VMs.md) a seguir:                                                                                                                                                         
-```
-sudo nano /etc/hosts
+```bash
+sudo apt install openvpn3
+sudo apt install kmod-ovpn-dco
 ```
 
-* Exemplo de Arquivo /etc/hosts:
+#### Importar o certificado para o OpenVPN 
 
-```
-127.0.0.1 localhost
-127.0.1.1 vm1-pc1   #Nome da VM 
-192.168.24.67 vm1-pc1 santos.grupo5-924.ifalara.net san
-192.168.24.69 vm2-pc1 coringao.grupo5-924.ifalara.net cor
-192.168.24.68 vm1-pc2 trikas.grupo5-924.ifalara.net tri
-192.168.24.70 vm2-pc2 vascao.grupo5-924.ifalara.net vas
-192.168.24.71 vm1-pc3 feto.grupo5-924.ifalara.net feto
-192.168.24.73 vm2-pc3 marcao.grupo5-924.ifalara.net mar
-192.168.24.72 vm1-pc4 felippo.grupo5-924.ifalara.net flpp
-192.168.24.74 vm2-pc4 juarez.grupo5-924.ifalara.net jua
+* Baixe o arquivo com extensão ``.ovpn`` disponível no classroom
+* Ou faça o download direto pelo terminal.
 
-# The following lines are desirable for IPv6 capable hosts
-::1     localhost ip6-localhost ip6-loopback
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
+```bash
+curl -fsSL https://www.dropbox.com/s/hb8ee3kiwkhutbl/vpn924.labredes.arapiraca.ifal.edu.br.ovpn?dl=0 > ~/vpn924.labredes.arapiraca.ifal.edu.br.ovpn
 ```
 
-> **Fazer todos os passos do roteiro em todas as VMS!!!**
 
-# Últimos passos: 
+* ``CONFIG_FILE`` = arquivo de configuração .ovpn
+* ``CONFIG_NAME``= nome da configuração
 
-## Topologia Física da Rede Virtualizada
-Com o auxílio de um switch, conectamos todos os computadores entre si através do cabo ethernet, como mostrado nas respectivas imagens:
-
-![20220812_170930-min](https://user-images.githubusercontent.com/86027160/186281131-6da9185c-fede-461a-a395-4ec751ff53b1.jpg)
-![20220812_170937-min](https://user-images.githubusercontent.com/86027160/186281185-534d8cfb-ebcb-4009-8258-a9c0ec2b2bda.jpg)
-![20220812_171012-min](https://user-images.githubusercontent.com/86027160/186281163-2322ff51-0b1e-441c-badf-13bfb6b6f010.jpg)
-
-* Nas imagens acima é possível ver a `topologia física` da rede. Nela, temos 4 cabos ethernet de par trançado ligados ao switch de 8 portas, já o switch está plugado a tomada. Assim, fazendo com que todos os PCs estejam conectados entre si.  
-
-Logo após isso, já será possível conectar qualquer VM a outra dentro da rede.  
-
-## "Pingar" para outra máquina virtual:
-
+```bash
+openvpn3 config-import --config CONFIG_FILE --name CONFIG_NAME --persistent
+openvpn3 config-manage --show --config CONFIG_NAME --dco true
 ```
-ping ipderedeunico 
+* exemplo
+```bash
+openvpn3 config-import --config vpn924.labredes.arapiraca.ifal.edu.br.ovpn --name vpn924.labredes --persistent
+openvpn3 config-manage --show --config vpn924.labredes --dco true
 ```
 
-Exemplo:
-```
-ping 192.168.24.70
+### Manipulando os perfis de configração da VPN
+
+#### Listando as os perfis de configuração instalados
+```bash
+openvpn3 configs-list
 ```
 
-## Logar em outra máquina virtual:
+### Manipulando a conexão VPN
+
+#### Listar as conexões abertas
+```bash
+openvpn3 sessions-list
 ```
-ssh usuario@ipderedeunico
+
+#### Iniciar a conexão
+```bash
+openvpn3 session-start --config CONFIG_NAME
 ```
-Exemplo: 
+* Exemplo
+```bash
+openvpn3 session-start --config vpn924.labredes
 ```
-ssh administrador@192.168.24.70
+
+### Acessar a VM do SAMBA
+
+```bash
+ssh administrador@10.9.2.123
 ```
+> usuário: ruanranison.silva
+
+> senha: 2019308308
+
+### Instalando o SAMBA
+```bash
+sudo apt update
+sudo apt install samba
+```
+### Nome da máquina
+
+Conferir os nomes das MV conforme a [Planilha de Acompanhamento da 924 (Grupo 5)](https://docs.google.com/spreadsheets/d/1pbw24Sg2nh0gQRG1wxN9MRf_ZY9LmZ3iT0STNHoUVq8/edit#gid=680415071). Editar o nome da máquina
+
+```bash
+$ sudo hostnamectl set-hostname samba-srv
+```
+OBS: após o reboot o nome da máquina aparecerá no prompt do shell
+
+```
+Tabela 1: Definições da rede interna da turma 924
+--------------------------------
+|  DESCRICAO  |  IP            |
+--------------------------------
+| rede        | 10.9.24.0      |
+| máscara     | 255.255.255.0  |
+| Gateway     | 10.9.24.1      |
+| Samba-SRV   | 10.9.24.5      |
+| NameServer1 | 10.9.24.10     |
+| NameServer2 | 10.9.24.11     |
+--------------------------------
+```
+### Definir o IP da rede interna para o Samba-SRV
+
+```bash
+$ sudo nano /etc/netplan/00-installer-config.yaml
+```
+
+```
+network:
+    ethernets:
+        enp0s3:
+            addresses: [10.9.24.5/24]
+            gateway4: 10.9.24.1
+            dhcp4: false 
+    version: 2
+```
+
+```bash
+$ sudo netplan apply
+$ ifconfig -a
+$ ping 10.9.24.1
+```
+
+
+
+
+
+
+
+
+
+
 
 ## Testes
 
