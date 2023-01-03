@@ -14,7 +14,7 @@
 
 Para que seja possível uma conexão entre as VMs e os PCs da nossa rede virtualizada, será necessário algumas configurações de acesso, configuração estática de IPs, etc.
 
-* [Planilha de Acompanhamento da 924 (Grupo 5)](https://docs.google.com/spreadsheets/d/1pbw24Sg2nh0gQRG1wxN9MRf_ZY9LmZ3iT0STNHoUVq8/edit#gid=680415071)
+* [Planilha de Acompanhamento da 924 (Grupo 5)](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/planilha.md)
 * [Usuários e Senhas das VMs](https://drive.google.com/file/d/1MdV-bKWlw6sobG24lDvdSd3cdz1gXh2w/view)
 
 ## Instalação do SAMBA
@@ -115,7 +115,7 @@ sudo apt install samba
 ```
 ### Nome da máquina
 
-Conferir os nomes das MV conforme a [Planilha de Acompanhamento da 924 (Grupo 5)](https://docs.google.com/spreadsheets/d/1pbw24Sg2nh0gQRG1wxN9MRf_ZY9LmZ3iT0STNHoUVq8/edit#gid=680415071). Editar o nome da máquina
+Conferir os nomes das MV conforme a [Planilha de Acompanhamento da 924 (Grupo 5)](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/planilha.md). Editar o nome da máquina
 
 ```bash
 $ sudo hostnamectl set-hostname samba-srv
@@ -197,7 +197,7 @@ tcp        0      0 0.0.0.0:445             0.0.0.0:*               LISTEN
 tcp        0      0 0.0.0.0:139             0.0.0.0:*               LISTEN   
 ```
 
-    5. Faça o backup do arquivo de configuração do samba e cria um arquivo novo somente com os comandos necessários.
+* Faça o backup do arquivo de configuração do samba e cria um arquivo novo somente com os comandos necessários.
     
 ```bash
 $ sudo cp /etc/samba/smb.conf{,.backup}
@@ -245,7 +245,7 @@ $ sudo nano /etc/samba/smb.conf
 
 ### Edite o arquivo de configuração /etc/samba/smb.conf
 
-	* adicione as interfaces da sua máquina na linha "interfaces = 127.0.0.1/8 enp0s3", separando os nomes das interfaces por espaços.
+* adicione as interfaces da sua máquina na linha "interfaces = 127.0.0.1/8 enp0s3", separando os nomes das interfaces por espaços.
   
 ```bash
 $ sudo nano /etc/samba/smb.conf
@@ -305,13 +305,13 @@ $ sudo nano /etc/samba/smb.conf
    force create mode = 0777
    force directory mode = 0777
 ```
-    * Renicie o serviço smbd
+* Reinicie o serviço smbd
     
 ```bash
 $ sudo systemctl restart smbd
 ```
 
-   * modifica a pasta /samba/public para acesso a somente usuários do grupo sambashare
+* modifica a pasta /samba/public para acesso a somente usuários do grupo sambashare
    
 ```
 [public]
@@ -352,7 +352,7 @@ Enter the new value, or press ENTER for the default
 	Other []: 
 Is the information correct? [Y/n] y
 ```
-    * É necessário vincular o usuário do S.O. ao Serviço Samba. Repita a senha de aluno ou crie uma senha nova somente para acessar o compartilhamento de arquivo. Neste caso repetiremos a senha do usuário aluno
+* É necessário vincular o usuário do S.O. ao Serviço Samba. Repita a senha de aluno ou crie uma senha nova somente para acessar o compartilhamento de arquivo. Neste caso repetiremos a senha do usuário aluno
     
 ```bash
 $ sudo smbpasswd -a aluno
@@ -364,13 +364,13 @@ $ sudo usermod -aG sambashare aluno
 
 ```
     
-    * O Samba já está instalado, agora precisamos criar um diretório para compartilhá-lo em rede.
+* O Samba já está instalado, agora precisamos criar um diretório para compartilhá-lo em rede.
    
 ```bash
 $ mkdir /home/<username>/sambashare/
 $ sudo mkdir -p /samba/public
 ```
-    * configure as permissões para que qualquer um possa acessar o compartilhamento público.
+* configure as permissões para que qualquer um possa acessar o compartilhamento público.
 
 ```bash
 sudo chown -R nobody:nogroup /samba/public
@@ -378,18 +378,6 @@ sudo chmod -R 0775 /samba/public
 sudo chgrp sambashare /samba/public
 
 ```
-### Cliente do compartilhamento:
-   
-    * Em um máquina com Windows (também pode usar linux os MacOS) digite no Winndows Explorer o endereço IP do servidor samba da seguinte forma:
-    **\\ip_do_maquina**. Exemplo: \\10.9.24.124
-    
-   <p><center> Figura 1: Tela do Windows Explorer com o acesso ao recurso compartilhado.</center></p>   
-   <img src="cliente_samba.png" alt="acesso pelo cliente samba"
-	title="Figura 1: acesso pelo cliente samba" width="800" height="540" /> 
-
-
-
-
 
 
 
