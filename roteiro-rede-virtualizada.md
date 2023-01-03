@@ -18,6 +18,8 @@ Para que seja possível uma conexão entre as VMs e os PCs da nossa rede virtual
 * [Usuários e Senhas das VMs](https://drive.google.com/file/d/1MdV-bKWlw6sobG24lDvdSd3cdz1gXh2w/view)
 * [Instalação do SAMBA](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/samba.md)
 * [Instalação do Gateway](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/gateway.md)
+* [Instalação do NameServer1](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/dns-master.md)
+* [Instalação do NameServer2](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/dns-slave.md)
 
 
 ## Testes
