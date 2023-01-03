@@ -17,7 +17,7 @@ Para que seja possível uma conexão entre as VMs e os PCs da nossa rede virtual
 * [Planilha de Acompanhamento da 924 (Grupo 5)](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/planilha.md)
 * [Usuários e Senhas das VMs](https://drive.google.com/file/d/1MdV-bKWlw6sobG24lDvdSd3cdz1gXh2w/view)
 * [Instalação do SAMBA](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/samba.md)
-* [Instalação do Gateway]()
+* [Instalação do Gateway](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/gateway.md)
 
 
 ## Testes
