@@ -21,9 +21,8 @@ Criar um ambiente de rede virtualizado, no qual deve conter 6 máquinas virtuais
 
 ## Tópicos
 
-* [Configuração Estática das VMs]()
-* [Roteiro - Rede Virtualizada]()
-* Testes de [ping]() e [SSH]()
+* [Configuração das VMs](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/planilha.md)
+* [Roteiro - Rede Virtualizada](https://github.com/ruanranison/Projeto_Final_SRED_924-GRUPO5/blob/main/roteiro-rede-virtualizada.md)
 
 
 ## Considerações Finais 
